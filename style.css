@@ -1,0 +1,207 @@
+body{
+    margin: 0 auto;
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: rgb(230, 230, 230);
+}
+
+.header{
+    background-color: white;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+    margin-bottom: 20px;
+}
+
+.line{
+    width: 100%;
+    height: 10px;
+    background-color: red;
+}
+
+.logo img{
+    width: 5%;
+}
+
+.logo{
+    width: 100%;
+    text-align: center;
+}
+
+li{
+    width: 100%;
+    border: solid 1px;
+}
+
+.navigationBar{
+    width: 100%;
+    overflow: auto;
+    margin:0px auto;
+    left:0px;
+    right:0px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: white;
+}
+
+.navigationBar a{  
+    float: left;
+    padding: 5px;
+    color: rgb(70, 70, 70);
+    text-decoration: none;
+    font-size: 17px;
+    text-align: center;
+    border:lightgray solid 0.2px;
+    border-left: none;
+    font-weight: bold;
+    margin:0px auto;
+    left:0px;
+    right:0px;
+    border-width: thin;
+    font-size: 12px;
+}
+.perc1{
+    width:10%;
+}
+.perc3{
+    width:30%;
+}
+
+.sekcija{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px rgb(179, 179, 179); 
+    margin: 10px auto 20px;
+    padding-bottom: 40px;
+}
+.berlin-sport .headerLink{
+    background-color: rgb(253, 112, 56);
+    width: 100%;
+    text-align: center;
+    padding: 5px 25px 3px;
+}
+
+.sekcija .headerLink a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color:white;
+}
+
+.sadrzaj img{
+    width: 90%;
+    margin: auto;
+}
+
+.row{
+    margin-top: 10px;
+}
+
+.card-body p{
+    color:red;
+    font-weight: bolder;
+}
+
+.card-body h5{
+    font-weight: bolder;
+}
+
+.kultur .headerLink{
+    background-color: rgb(255, 22, 22);
+    width: 100%;
+    text-align: center;
+    padding: 5px 25px 3px;
+}
+
+footer{
+    background-color: rgb(78, 78, 78);
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 300px;
+}
+
+footer .container{
+    margin: auto;
+    background-color: rgb(102, 102, 102);
+    width: 50%;
+    height: 50%;
+}
+
+footer .foot{
+    background-color: white;
+    color: black;
+    width: 50%;
+    height: 50%;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+}
+
+.forma{
+    padding: 50px;
+}
+
+.form-item{
+    margin: 20px 0;
+}
+
+.form-item input[type="text"], .form-item textarea{
+    background-color: rgb(235, 235, 235);
+    resize: none;
+    border-radius: 4px;
+}
+
+.form-item input[type="text"]{
+    width: 48%;
+}
+
+#res {
+	box-shadow:inset 0px 1px 0px 0px #cf866c;
+	background:linear-gradient(to bottom, #ff0000 5%, #bc3315 100%);
+	background-color:#ff0000;
+	border-radius:3px;
+	border:1px solid #942911;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #854629;
+}
+#res:hover {
+	background:linear-gradient(to bottom, #bc3315 5%, #ff0000 100%);
+	background-color:#bc3315;
+}
+#res:active {
+	position:relative;
+	top:1px;
+}
+
+#sub {
+	box-shadow:inset 0px 1px 0px 0px #0dff00;
+	background:linear-gradient(to bottom, #00ff1e 5%, #00911b 100%);
+	background-color:#00ff1e;
+	border-radius:3px;
+	border:1px solid #00ff33;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #009105;
+}
+#sub:hover {
+	background:linear-gradient(to bottom, #00911b 5%, #00ff1e 100%);
+	background-color:#00911b;
+}
+#sub:active {
+	position:relative;
+	top:1px;
+}
