@@ -10,12 +10,12 @@
         <div class="header">
             <div class="line"></div>
 
-            <div class="logo"><img src="B.Z..svg.png" alt="Logo"></div>
+            <div class="logo"><img src="img/B.Z..svg.png" alt="Logo"></div>
               <div class="navigationBar">
-                <a href="index.html" class="perc1">Home</a>
-                <a href="#" class="perc3">Berlin-Sport</a>
-                <a href="#" class="perc3">Kultur und show</a>
-                <a href="unos.html" class="perc3">Administracija</a>
+                <a href="index.php" class="perc1">Home</a>
+                <a href="kategorija.php?id=sport"  class="perc3">Berlin-Sport</a>
+                <a href="kategorija.php?id=kultura"  class="perc3">Kultur und show</a>
+                <a href="administracija.php" class="perc3">Administracija</a>
               </div>
      
         </div>
@@ -47,7 +47,7 @@
               <label for="kategorijaVijesti">Kategorija:</label>
               <div class="form-field">
                 <select name="kategorijaVijesti" id="kategorijaVijesti">              
-                  <option value="kultur">Kultur Und Show</option>
+                  <option value="kultura">Kultur Und Show</option>
                   <option value="sport">Berlin-Sport</option>
                 </select><br/>
                 </div>
@@ -56,7 +56,7 @@
             <div class="form-item">
               <label for="img">Slika:</label><br>
               <div class="form-field">
-                <input type="file" id="img" name="img" accept="image/*" />
+                <input type="file" id="slika" name="slika" accept="image/*" />
               </div>
             </div>
 

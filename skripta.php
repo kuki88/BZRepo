@@ -11,23 +11,29 @@
     <body>
         <?php
 
+            include "connect.php";
+
             if(isset($_POST['naslovClanka']) && isset($_POST['sazetak']) && isset($_POST['tekst'])){
-                if(isset($_POST['img'])) $slika = $_POST['img'];
+                if(isset($_POST['slika'])) $slika = $_FILES['slika']['name'];
                 $naslov = $_POST['naslovClanka'];
                 $sazetak = $_POST['sazetak'];
                 $tekst = $_POST['tekst'];
-
                 $kategorija = $_POST['kategorijaVijesti'];
-                $check = $_POST['arhiva'];  
-            }
-            function potvrda(){
-                    $naslov = $_POST['naslovClanka'];
-                    $sazetak = $_POST['sazetak'];
-                    $tekst = $_POST['tekst'];
+                $datum = date('d.m.Y');
+                $check = 0;
 
-                    $kategorija = $_POST['kategorijaVijesti'];
-                    $check = $_POST['arhiva'];
+                if(isset($_POST['arhiva'])){
+                    $check = 1;  
                 }
+            }
+            
+            $targer_dir = 'img/'.$slika;
+            move_uploaded_file($_FILES["slika"]["tmp_name"], $target_dir);
+
+            $query = "INSERT INTO Vijesti(datum, naslov, sazetak, tekst, slika, kategorija, arhiva)
+                    VALUES('$datum', '$naslov', '$sazetak', '$tekst', '$slika', '$kategorija', '$check');";
+            $res = mysqli_query($dbc, $query) or die("Error querying database!");
+            mysqli_close($dbc); 
         ?>
 
         <div class="header">

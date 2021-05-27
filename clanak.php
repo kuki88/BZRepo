@@ -10,12 +10,12 @@
         <div class="heder">
             <div class="line"></div>
 
-            <div class="logo"><img src="B.Z..svg.png" alt="Logo"></div>
+            <div class="logo"><img src="img/B.Z..svg.png" alt="Logo"></div>
               <div class="navigationBar">
-                <a href="#" class="perc1">Home</a>
-                <a href="#" class="perc3">Berlin-Sport</a>
-                <a href="#" class="perc3">Kultur und show</a>
-                <a href="#" class="perc3">Administracija</a>
+                <a href="index.php" class="perc1">Home</a>
+                <a href="kategorija.php?id=sport"  class="perc3">Berlin-Sport</a>
+                <a href="kategorija.php?id=kultura"  class="perc3">Kultur und show</a>
+                <a href="administracija.php" class="perc3">Administracija</a>
               </div>
      
         </div>
@@ -24,7 +24,7 @@
 
           <h1>Clanak title</h1>
 
-          <img src="2637581.jpg" alt="Clanak slika">
+          <img src="img/2637581.jpg" alt="Clanak slika">
 
           <hr/>
 
