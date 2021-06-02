@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="style.css">
         <title>B.Z. Berlin</title>
         <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="2;url=administracija.php">
     </head>
 
     <body>
@@ -14,25 +15,25 @@
             include "connect.php";
 
             if(isset($_POST['naslovClanka']) && isset($_POST['sazetak']) && isset($_POST['tekst'])){
-                if(isset($_POST['slika'])) $slika = $_FILES['slika']['name'];
                 $naslov = $_POST['naslovClanka'];
                 $sazetak = $_POST['sazetak'];
                 $tekst = $_POST['tekst'];
                 $kategorija = $_POST['kategorijaVijesti'];
                 $datum = date('d.m.Y');
                 $check = 0;
+                $slika = $_FILES['slika']['name'];
+                $targer_dir = 'img/'.$slika;
+                echo $targer_dir;
+                move_uploaded_file($_FILES["slika"]["name"], $target_dir);        
 
                 if(isset($_POST['arhiva'])){
                     $check = 1;  
                 }
             }
-            
-            $targer_dir = 'img/'.$slika;
-            move_uploaded_file($_FILES["slika"]["tmp_name"], $target_dir);
 
-            $query = "INSERT INTO Vijesti(datum, naslov, sazetak, tekst, slika, kategorija, arhiva)
+            $query = "INSERT INTO Vijesti(datum, naslov, sazetak, sadrzaj, slika, kategorija, arhiva)
                     VALUES('$datum', '$naslov', '$sazetak', '$tekst', '$slika', '$kategorija', '$check');";
-            $res = mysqli_query($dbc, $query) or die("Error querying database!");
+            $res = mysqli_query($dbc, $query) or die("Error querying database");
             mysqli_close($dbc); 
         ?>
 
@@ -41,10 +42,10 @@
 
             <div class="logo"><img src="B.Z..svg.png" alt="Logo"></div>
             <div class="navigationBar">
-                <a href="index.html" class="perc1">Home</a>
-                <a href="#" class="perc3">Berlin-Sport</a>
-                <a href="#" class="perc3">Kultur und show</a>
-                <a href="unos.html" class="perc3">Administracija</a>
+                <a href="index.php" class="perc1">Home</a>
+                <a href="kategorija.php?id=sport"  class="perc3">Berlin-Sport</a>
+                <a href="kategorija.php?id=kultura"  class="perc3">Kultur und show</a>
+                <a href="administracija.php" class="perc3">Administracija</a>
             </div>
 
         </div>

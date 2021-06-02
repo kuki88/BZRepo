@@ -22,7 +22,35 @@
 
         <section class="clanak">
 
-          <h1>Clanak title</h1>
+          <?php
+            include "connect.php";
+            define('IMGPATH', 'img/');
+
+            $query = "SELECT * FROM vijesti WHERE arhiva=0 AND id=".$_GET["id"]."";
+            $result = mysqli_query($dbc, $query);
+
+            $i = 0;
+
+            if($result){
+
+                while($row = mysqli_fetch_array($result)){
+
+                echo "<h1>".$row["naslov"]."</h1>";
+                echo "  <img src='".IMGPATH.$row["slika"]."' alt='Clanak slika'>";
+                echo "  <hr/>";
+                echo "  <div class='content'>
+                          <p id='podebljani'>".$row["sazetak"]."
+                          </p>
+              
+                          <p>".$row["sadrzaj"]."</p>         
+                        </div>
+                    ";
+              }
+            }
+
+          ?>
+
+          <!-- <h1>Clanak title</h1>
 
           <img src="img/2637581.jpg" alt="Clanak slika">
 
@@ -41,7 +69,7 @@
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
             
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>         
-          </div>
+          </div> -->
 
         </section>
       <footer>
