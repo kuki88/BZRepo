@@ -42,7 +42,7 @@
             <div class="form-item">
               <label for="tekst">Sadržaj vijesti:</label><br>
               <div class="form-field">
-                <textarea id="tekst" name="tekst" cols="90" rows="10"></textarea>
+                <textarea id="tekst" name="tekst" cols="90" rows="10"></textarea><br/>
                 <span id="errorSadrzaj" class="bojaPoruke"></span>
               </div>
             </div>
@@ -90,7 +90,7 @@
 
             if(naslov.length < 5 || naslov.length > 30){
               slanje = false;
-              poljeNaslov.style.border = "1px solid red;";
+              poljeNaslov.style.border = "1px solid red";
               document.getElementById("errorNaslov").innerHTML = "Naslov mora imati između 5 i 30 znakova!";
             }
 
@@ -101,7 +101,7 @@
 
             if(sazetak.length < 10 || sazetak.length > 100){
               slanje = false;
-              poljeSazetak.style.border = "1px solid red;";
+              poljeSazetak.style.border = "1px solid red";
               document.getElementById("errorSazetak").innerHTML = "Sažetak mora imati između 10 i 100 znakova!";
             }
 
@@ -111,7 +111,7 @@
 
             if(sadrzaj.length == 0){
               slanje = false;
-              poljeSadrzaj.style.border = "1px solid red;";
+              poljeSadrzaj.style.border = "1px solid red";
               document.getElementById("errorSadrzaj").innerHTML = "Sadržaj se mora unijeti!";
             }
 
@@ -121,7 +121,7 @@
 
             if(slika.length == 0){
               slanje = false;
-              poljeSlika.style.border = "1px solid red;";
+              poljeSlika.style.border = "1px solid red";
               document.getElementById("errorSlika").innerHTML = "Slika mora biti unesena!";
             }
 
@@ -131,7 +131,7 @@
 
             if(document.getElementById('kategorijaVijesti')){
               slanje = false;
-              poljeKat.style.border = "1px solid red;";
+              poljeKat.style.border = "1px solid red";
               document.getElementById("errorKategorija").innerHTML = "Kategorija mora biti odabrana!";
             }
 
