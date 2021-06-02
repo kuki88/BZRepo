@@ -27,84 +27,67 @@
 
         <section class="sekcija sport">
           <div class="headerLink">
-            <h3><a href="#">BERLIN-SPORT ></a></h3>
+            <h3><a href="kategorija.php?id=sport">BERLIN-SPORT ></a></h3>
           </div>
 
           <div class="container">
-            <?php
-
-              $query = "SELECT * FROM vijesti WHERE arhiva=0 AND kategorija='sport' LIMIT 3";
-              $result = mysqli_query($dbc, $query);
-
-              $i = 0;
-
-              while($row = mysqli_fetch_array($result)){
-
-                echo "<div class='col-lg-4'>";
-                echo "  <img class='card-img-top' src='".IMGPATH.$row['slika']."' alt='Card image cap'>";
-                echo "  <div class='card-body'>";
-                echo "    <a class='card-title' href='clanak.php?id=".$row['id']."'>".$row['naslov']."</a>";
-                echo "    <h5 class='card-text'>".$row['sazetak']."</h5>";
-                echo "  </div>";
-                echo "</div>";
-
-              }
-
-            ?>
             <div class="row">
-              <div class="col-lg-4">
-                <img class="card-img-top" src="img/215112.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <a href="clanak.php" class="card-title">Card title</a>
-                  <h5 class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</h5>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <img class="card-img-top" src="img/215112.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <a href="clanak.php" class="card-title clanakNaslov">Card title</a>
-                  <h5 class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</h5>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <img class="card-img-top" src="img/215112.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <a href="clanak.php" class="card-title clanakNaslov">Card title</a>
-                  <h5 class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</h5>
-                </div>
-              </div>    
+              <?php
+
+                $query = "SELECT * FROM vijesti WHERE arhiva=0 AND kategorija='sport' LIMIT 3";
+                $result = mysqli_query($dbc, $query);
+
+                if($result){
+
+                    while($row = mysqli_fetch_array($result)){
+
+                    echo "<div class='col-lg-4 kartica'>";
+                    echo "  <img class='card-img-top' src='".IMGPATH.$row['slika']."' alt='Card image cap'>";
+                    echo "  <div class='card-body'>";
+                    echo "    <a class='card-title' href='clanak.php?id=".$row['id']."'>".$row['naslov']."</a>";
+                    echo "    <h5 class='card-text'>".$row['sazetak']."</h5>";
+                    echo "  </div>";
+                    echo "</div>";
+
+                  }
+                }
+
+              ?>
+
             </div>  
           </div>
         </section>
 
         <section class="sekcija kultur">
           <div class="headerLink">
-            <h3><a href="#">KULTUR UND SHOW ></a></h3>
+            <h3><a href="kategorija.php?id=kultura">KULTUR UND SHOW ></a></h3>
           </div>
 
           <div class="container">
             <div class="row">
-              <div class="col-lg-4">
-                <img class="card-img-top" src="img/215112.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-title">Card title</p>
-                  <h5 class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</h5>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <img class="card-img-top" src="img/215112.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-title">Card title</p>
-                  <h5 class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</h5>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <img class="card-img-top" src="img/215112.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-title">Card title</p>
-                  <h5 class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</h5>
-                </div>
-              </div>    
+              <?php
+
+                $query = "SELECT * FROM vijesti WHERE arhiva=0 AND kategorija='kultura' LIMIT 3";
+                $result = mysqli_query($dbc, $query);
+
+                if($result){
+
+                    while($row = mysqli_fetch_array($result)){
+
+                    echo "<div class='col-lg-4'>";
+                    echo "  <img class='card-img-top' src='".IMGPATH.$row['slika']."' alt='Card image cap'>";
+                    echo "  <div class='card-body'>";
+                    echo "    <a class='card-title' href='clanak.php?id=".$row['id']."'>".$row['naslov']."</a>";
+                    echo "    <h5 class='card-text'>".$row['sazetak']."</h5>";
+                    echo "  </div>";
+                    echo "</div>";
+
+                  }
+                }
+                else{
+                }
+
+              ?>
             </div>  
           </div>
         </section>
