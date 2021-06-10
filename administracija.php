@@ -23,6 +23,8 @@
         </div>
 
         <?php
+            session_start();
+
             include "connect.php";
             define('IMGPATH', 'img/');
         ?>
@@ -30,11 +32,53 @@
 
         <section class="sekcija">
 
-            <div class="unos">
-                <a href="unos.php" value="Kreiraj Vijest" id="sub">Stvori novi clanak!</a>
-            </div>
+        <?php
+            $uspjesnaPrijava = false;
+            $admin = false;
 
-            <?php
+            if(isset($_POST['prijavaBtn'])){
+
+                echo "AAAAAAAAAAAA";
+
+                $imeKorisnika = $_POST["korisnickoIme"];
+                $lozinkaKorisnika = $_POST["lozinka"];
+
+                $qry = "SELECT korisnickoIme, lozinka, razina FROM korisnik
+                        WHERE korisnickoIme = ?";
+
+                $stmt = mysqli_stmt_init($dbc);
+
+                if(mysqli_stmt_prepare($stmt, $qry)){
+                    mysqli_stmt_bind_param($stmt, 's', $imeKorisnika);
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_store_result($stmt);
+                }
+
+                mysqli_stmt_bind_result($stmt, $imeKorisnika, $lozinkaKorisnika, $levelKorisnika);
+                mysqli_stmt_fetch($stmt);
+
+                if(password_verify($_POST['lozinka'], $lozinkaKorisnika) && mysqli_stmt_num_rows($stmt)>0){
+                    $uspjesnaPrijava = true;
+                    if($levelKorisnika == 1) $admin = true;
+                    else $admin = false;
+
+                    $_SESSION['$korisnickoIme'] = $imeKorisnika;
+                    $_SESSION['$razina'] = $levelKorisnika;
+
+                }
+                else {
+                    echo "Neuspješna prijava!";
+                }
+            }
+
+        ?>
+
+
+        <?php
+
+            if (($uspjesnaPrijava == true && $admin == true) || (isset($_SESSION['$korisnickoIme'])) && $_SESSION['$razina'] == 1){
+                echo '<a href="unos.php" value="Kreiraj Vijest" id="sub">Stvori novi clanak!</a>';
+
                 $query = "SELECT * FROM vijesti";
                 $result = mysqli_query($dbc, $query);
                 while ($row = mysqli_fetch_array($result)) {
@@ -96,7 +140,63 @@
                     </div>
                 </form>';
                 }
-            ?>
+            }
+            else if($uspjesnaPrijava == true && $admin == false){
+                echo "Dobrodošao ".$imeKorisnika." !. Uspješno si prijavljen, ali nisi administrator.";
+            }
+            else if (isset($_SESSION['$username']) && $_SESSION['$level'] == 0){
+                echo "Dobrodošao ".$_SESSION['$korisnickoIme']." !. Uspješno si prijavljen, ali nisi administrator.";
+            }
+            else if($uspjesnaPrijava == false){
+        ?>
+                <div class="rega" name="rega">
+                    <form action="" name="prijava" class="formaRega">
+
+                        <label for="korisnickoIme">Korisničko Ime:</label>
+                        <input type="text" name="korisnickoIme" id="korisnickoIme"/>
+                        <span id="errorKorisnicko"></span>
+
+                        <label for="password">Lozinka:</label>
+                        <input type="password" name="lozinka1" id="lozinka1"/>
+                        <span id="errorPass"></span>
+
+                        <button type="submit" name="prijavaBtn" id=prijavaBtn>Prijava</button>
+
+                        <button id="myButton" onclick="location.href='';">Registriraj se</button>
+                    </form>
+                </div>      
+
+            <script type="text/javascript">
+            
+                document.getElementById("prijavaBtn").onclick = function(event){
+                    var slanjeForme = true;
+
+                    var poljeKorisnicko = document.getElementById('korisnickoIme');
+                    var korisnicko = document.getElementById('korisnickoIme').value;
+
+                    if(korisnicko.length == 0){
+                        slanjeForme = false;
+                        poljeKorisnicko.style.border = "1px solid red";
+                        document.getElementById("errorKorisnicko").innerHTML = "Morate unijeti korisnicko ime";
+                    }
+
+                    var poljePass = document.getElementById('lozinka1');
+                    var pass = document.getElementById('lozinka1').value;
+
+                    if(pass.length == 0){
+                        slanjeForme = false;
+                        poljePass.style.border = "1px solid red";
+                        document.getElementById("errorPass").innerHTML = "Morate unijeti lozinku!";
+                    }
+
+                    return false;
+                }
+            
+            </script>
+
+        <?php
+            }
+        ?>
         </section>
         <footer>
             <div class="foot">

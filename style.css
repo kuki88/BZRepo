@@ -212,3 +212,60 @@ footer .foot{
 .bojaPoruke{
 	color: red;
 }
+
+.unos{
+    padding: 50px;
+}
+
+body {
+    font-family: "Open Sans";
+    font-size: 14px;
+}
+
+.rega{
+    padding: 60px;
+}
+
+.rega {
+    width: 50%;
+    margin: 0 auto;
+}
+.rega form label,
+.rega form input,
+.rega form button {
+    margin-bottom: 3px;
+    display: block;
+    width: 100%;
+}
+.rega form input {
+    height: 25px;
+    line-height: 25px;
+    color: #000;
+    padding: 0 6px;
+    box-sizing: border-box;
+}
+.rega form button, .rega form a {
+    height: 30px;
+    line-height: 30px;
+    background: #ff0000;
+    color: #fff;
+    margin-top: 10px;
+    cursor: pointer;
+    border: 0;
+}
+.rega form .error {
+    color: #ff0000;
+}
+
+.sekcija{
+    min-height: 500px;
+}
+
+.rega form label{
+    color: blue;
+}
+
+.rega form span {
+    padding: 15px 0px;
+    color: red;
+}
