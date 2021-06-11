@@ -23,13 +23,13 @@
         </div>
 
         <?php
+            session_start();
             include "connect.php";
             define('IMGPATH', 'img/');
 
+            if(isset($_POST['prijavaBtn'])){
 
-            if(isset($_POST['ime']) && isset($_POST['prezime']) && isset($_POST['korisnickoIme']) && isset($_POST['lozinka1'])){
 
-                echo "Aaaaaa";
                 $ime = $_POST['ime'];
                 $prezime = $_POST['prezime'];
                 $korisnickoIme = $_POST['korisnickoIme'];
@@ -38,16 +38,15 @@
                 $razina = 0;
                 $regKorisnik = false;
     
-                $qry = "SELECT FROM korisnik WHERE korisnickoIme = ?";
+                $qry = "SELECT * FROM korisnik WHERE korisnickoIme = '$korisnickoIme' LIMIT 1";
     
-                $stmt = mysqli_stmt_init($dbc);
-                if(mysqli_stmt_prepare($stmt, $qry)){
-                    mysqli_stmt_bind_param($stmt, 's', $korisnickoIme);
-                    mysqli_stmt_execute($stmt);
-                    mysqli_stmt_store_result($stmt);
+                $res = mysqli_query($dbc, $qry);
+
+                if(mysqli_num_rows($res) == 1){
+                    echo "<script type='text/javascript'>
+                            alert('Korisničko ime već postoji!');
+                        </script>";
                 }
-    
-                if(mysqli_stmt_num_rows($stmt) > 0) $poruka = "Korisničko ime već postoji!";
                 else{
                     $qry = "INSERT INTO korisnik(ime, prezime, korisnickoIme, lozinka, razina) VALUES(?, ?, ?, ?, ?)";
                     $stmt = mysqli_stmt_init($dbc);
@@ -59,19 +58,39 @@
                     }
                 }
     
-                mysqli_close($dbc);
-    
                 if($regKorisnik == true){
                     echo "Korisnik je uspješno registriran!";
+                    $_SESSION['$korisnickoIme'] = $korisnickoIme;
+                    $_SESSION['$razina'] = $razina;                    
                 }
+
+                mysqli_close($dbc);
+    
             }
+
+            if (isset($_SESSION['$korisnickoIme']) && $_SESSION['$razina'] == 0 || isset($_SESSION['$korisnickoIme']) && $_SESSION['$razina'] == 1){
+                echo "Već ste registrirani!";
+                ?>
+                <section class="sekcija">
+                    <h2>Već ste registrirani!</h2>
+                    <form action="" method="POST">
+                        <br/><button id='odjava' name='odjava' type='submit'>Odjavi se!</button>
+                    </form>
+                </section>
+            <?php
+                if(isset($_POST['odjava'])){
+                    session_destroy();
+                }    
+            }
+            else{
+
         ?>
 
 
         <section class="sekcija">
 
             <div class="rega" name="rega">
-                <form action="" name="prijava" class="formaRega">
+                <form action="" name="prijava" class="formaRega" method="POST">
 
                     <label for="ime">Ime:</label>
                     <input type="text" name="ime" id="ime"/>
@@ -93,42 +112,66 @@
                     <input type="password" name="lozinka2" id="lozinka2"/>
                     <span id="errorPass"></span>
 
-                    <button type="submit" id="prijava" name="prijava">Prijava</button>
+                    <button type="submit" id="prijavaBtn" name="prijavaBtn" value="Registriraj se!">Registriraj se!</button>
 
                 </form>
             </div>
 
+            <?php
+
+                }
+
+            ?>
+
             <script type="text/javascript">
 
-                var slanjeForme = true;
+                document.getElementById("prijavaBtn").onclick = function(event){
 
-                function provjeraUneseno(idPolja, porukaError, errorPolje){
-                    var polje = document.getElementById(idPolja);
-                    var vrijednost = document.getElementById(idPolja).value;
+                    var slanjeForme = true;
 
-                    if(vrijednost.length == 0){
+                    //provjera imena
+                    var poljeIme = document.getElementById("ime");
+                    var vrijednostIme = document.getElementById("ime").value;
+
+                    if(vrijednostIme.length == 0){
                         slanjeForme = false;
-                        polje.style.border="1px solid red";
-                        document.getElementById(errorPolje).innerHTML= porukaError;
+                        poljeIme.style.border="1px solid red";
+                        document.getElementById("errorIme").innerHTML= "Potrebno je unijeti ime!";
                     }
                     else{
                         poljeIme.style.border="1px solid black";
-                        document.getElementById(errorPolje).innerHTML="";
+                        document.getElementById("errorIme").innerHTML="";
                     }
 
-                    return false;
-                }
 
-                document.getElementById("prijava").onclick = function(event){
-
-                    //provjera imena
-                    provjeraUneseno("ime", "Potrebno je unijeti ime!", "errorIme");
                     
                     //provjera prezimena
-                    provjeraUneseno("prezime", "Potrebno je unijeti prezime!", "errorPrezime");
-                    
-                    //provjera korisnickog imena
-                    provjeraUneseno("korisnickoIme", "Potrebno je unijeti korisnicko ime!", "errorKorisnicko");
+                    var poljePrezime = document.getElementById("prezime");
+                    var vrijednostPrezime = document.getElementById("prezime").value;
+
+                    if(vrijednostPrezime.length == 0){
+                        slanjeForme = false;
+                        poljePrezime.style.border="1px solid red";
+                        document.getElementById("errorPrezime").innerHTML= "Potrebno je unijeti prezime!";
+                    }
+                    else{
+                        poljePrezime.style.border="1px solid black";
+                        document.getElementById("errorPrezime").innerHTML="";
+                    }
+
+                    var poljeKorisnicko = document.getElementById("korisnickoIme");
+                    var vrijednostKorisnicko = document.getElementById("korisnickoIme").value;
+
+                    if(vrijednostKorisnicko.length == 0){
+                        slanjeForme = false;
+                        poljeKorisnicko.style.border="1px solid red";
+                        document.getElementById("errorKorisnicko").innerHTML= "Potrebno je unijeti korisnicko ime!";
+                    }
+                    else{
+                        poljeKorisnicko.style.border="1px solid black";
+                        document.getElementById("errorKorisnicko").innerHTML="";
+                    }
+
                     
                     //provjera passworda
                     var poljePass1 = document.getElementById("lozinka1");
@@ -149,12 +192,12 @@
 
                     if(slanjeForme != true){
                         event.preventDefault();
+                        return false;
                     }
 
 
-                    return false;
                 }
-
+            
             </script>
 
         </section>
