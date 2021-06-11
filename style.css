@@ -244,7 +244,7 @@ body {
     padding: 0 6px;
     box-sizing: border-box;
 }
-.rega form button, .rega form a {
+.rega form button, .rega form input[type=button] {
     height: 30px;
     line-height: 30px;
     background: #ff0000;

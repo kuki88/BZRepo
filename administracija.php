@@ -38,7 +38,7 @@
 
             if(isset($_POST['prijavaBtn'])){
 
-                echo "AAAAAAAAAAAA";
+                echo "<script> alert('Nesto');</script>";
 
                 $imeKorisnika = $_POST["korisnickoIme"];
                 $lozinkaKorisnika = $_POST["lozinka"];
@@ -144,25 +144,31 @@
             else if($uspjesnaPrijava == true && $admin == false){
                 echo "Dobrodošao ".$imeKorisnika." !. Uspješno si prijavljen, ali nisi administrator.";
             }
-            else if (isset($_SESSION['$username']) && $_SESSION['$level'] == 0){
-                echo "Dobrodošao ".$_SESSION['$korisnickoIme']." !. Uspješno si prijavljen, ali nisi administrator.";
+            else if (isset($_SESSION['$korisnickoIme']) && $_SESSION['$razina'] == 0){
+                echo "Dobrodošao ".$_SESSION['$korisnickoIme']."! Uspješno si prijavljen, ali nisi administrator.";
+                ?>
+                    <form action="" method="POST">
+                        <br/><button id='odjava' name='odjava' type='submit'>Odjavi se!</button>
+                    </form>
+                <?php
+                
             }
             else if($uspjesnaPrijava == false){
         ?>
                 <div class="rega" name="rega">
-                    <form action="" name="prijava" class="formaRega">
+                    <form action="" name="prijava" class="formaRega" method="POST">
 
                         <label for="korisnickoIme">Korisničko Ime:</label>
                         <input type="text" name="korisnickoIme" id="korisnickoIme"/>
                         <span id="errorKorisnicko"></span>
 
                         <label for="password">Lozinka:</label>
-                        <input type="password" name="lozinka1" id="lozinka1"/>
+                        <input type="password" name="lozinka" id="lozinka"/>
                         <span id="errorPass"></span>
 
-                        <button type="submit" name="prijavaBtn" id=prijavaBtn>Prijava</button>
+                        <button type="submit" name="prijavaBtn" id="prijavaBtn">Prijava</button>
 
-                        <button id="myButton" onclick="location.href='';">Registriraj se</button>
+                        <button type="submit" name="rega">Registriraj se</button>
                     </form>
                 </div>      
 
@@ -180,8 +186,8 @@
                         document.getElementById("errorKorisnicko").innerHTML = "Morate unijeti korisnicko ime";
                     }
 
-                    var poljePass = document.getElementById('lozinka1');
-                    var pass = document.getElementById('lozinka1').value;
+                    var poljePass = document.getElementById('lozinka');
+                    var pass = document.getElementById('lozinka').value;
 
                     if(pass.length == 0){
                         slanjeForme = false;
@@ -189,13 +195,25 @@
                         document.getElementById("errorPass").innerHTML = "Morate unijeti lozinku!";
                     }
 
-                    return false;
+                    if(slanjeForme != true){
+                        event.preventDefault();
+                        return false;
+                    }
                 }
             
             </script>
 
         <?php
             }
+
+            if(isset($_POST['odjava'])){
+                session_destroy();
+            }   
+            
+            if(isset($_POST['rega'])){
+                echo "<script>window.location.href = 'http://localhost/BZberlin/BZberlin/registracija.php';</script>";
+            }
+
         ?>
         </section>
         <footer>
