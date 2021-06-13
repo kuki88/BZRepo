@@ -48,10 +48,10 @@
             </div>
 
             <div class="form-item">
-              <label for="kategorijaVijesti">Kategorija:</label>
-              <div class="form-field">
-                <select name="kategorijaVijesti" id="kategorijaVijesti">
-                  <option value="" selected disabled hidden>Odaberite kategoriju...</option>              
+                <label for="kategorijaVijesti">Kategorija:</label>
+                <div class="form-field">
+                <select name="kategorija" id="kategorija">
+                  <option value="" selected disabled>Odaberite kategoriju...</option>              
                   <option value="kultura">Kultur Und Show</option>
                   <option value="sport">Berlin-Sport</option>
                 </select><br/>
@@ -73,25 +73,23 @@
             </div>
 
             <div class="form-item">
-              <input type="reset" value="Poništi" id="res"/>
-              <input type="submit" value="Kreiraj Vijest" id="sub" />
+              <button type="reset" value="Poništi" id="res">Poništi</button>
+              <button type="submit" id="sub">Kreiraj Vijest</button>
             </div>
 
           </form>
         </section>
 
         <script>
-          document.getElementById("sub").onclick = function () {
-            var slanje = true;
-
+          document.getElementById("sub").onclick = function(event) {
             //provjera naslova (5 - 30)
             var poljeNaslov = document.getElementById('naslovClanka');
             var naslov = document.getElementById('naslovClanka').value;
 
             if(naslov.length < 5 || naslov.length > 30){
-              slanje = false;
               poljeNaslov.style.border = "1px solid red";
               document.getElementById("errorNaslov").innerHTML = "Naslov mora imati između 5 i 30 znakova!";
+              event.preventDefault();
             }
 
 
@@ -100,9 +98,9 @@
             var sazetak = document.getElementById('sazetak').value;
 
             if(sazetak.length < 10 || sazetak.length > 100){
-              slanje = false;
               poljeSazetak.style.border = "1px solid red";
               document.getElementById("errorSazetak").innerHTML = "Sažetak mora imati između 10 i 100 znakova!";
+              event.preventDefault();
             }
 
             //provjera je li unesen sadrzaj
@@ -110,9 +108,9 @@
             var sadrzaj = document.getElementById('tekst').value;
 
             if(sadrzaj.length == 0){
-              slanje = false;
               poljeSadrzaj.style.border = "1px solid red";
               document.getElementById("errorSadrzaj").innerHTML = "Sadržaj se mora unijeti!";
+              event.preventDefault();
             }
 
             //provjera je li unesena slika
@@ -120,24 +118,24 @@
             var slika = document.getElementById('slika').value;
 
             if(slika.length == 0){
-              slanje = false;
               poljeSlika.style.border = "1px solid red";
               document.getElementById("errorSlika").innerHTML = "Slika mora biti unesena!";
+              event.preventDefault();
             }
 
             //provjera je li oznacena kategorija
             var poljeKat = document.getElementById('kategorijaVijesti');
             var kategorija = document.getElementById('kategorijaVijesti').value;
 
-            if(document.getElementById('kategorijaVijesti')){
-              slanje = false;
+            alert(slanjeForme);
+
+            if(document.getElementById('kategorijaVijesti').value = ""){
               poljeKat.style.border = "1px solid red";
               document.getElementById("errorKategorija").innerHTML = "Kategorija mora biti odabrana!";
+              event.preventDefault();
+
             }
 
-            if(slanje != true){
-              event.preventDefault();
-            }
           }
         </script>
 

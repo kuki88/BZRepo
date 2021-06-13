@@ -38,8 +38,6 @@
 
             if(isset($_POST['prijavaBtn'])){
 
-                echo "<script> alert('Nesto');</script>";
-
                 $imeKorisnika = $_POST["korisnickoIme"];
                 $lozinkaKorisnika = $_POST["lozinka"];
 
@@ -77,7 +75,8 @@
         <?php
 
             if (($uspjesnaPrijava == true && $admin == true) || (isset($_SESSION['$korisnickoIme'])) && $_SESSION['$razina'] == 1){
-                echo '<a href="unos.php" value="Kreiraj Vijest" id="sub">Stvori novi clanak!</a>';
+                
+                echo '<a href="unos.php" value="Kreiraj Vijest" id="sub">Stvori novi članak!</a>';
 
                 $query = "SELECT * FROM vijesti";
                 $result = mysqli_query($dbc, $query);
@@ -113,7 +112,7 @@
                     <div class="form-item">
                         <label for="kategorija">Kategorija vijesti:</label>
                         <div class="form-field">
-                            <select name="kategorija" id="" class="form-field-textual" value="' . $row['kategorija'] . '">
+                            <select name="kategorija" id="" class="form-field-textual" value="' . $row['kategorija'] . '">    
                                 <option value="sport">Sport</option>
                                 <option value="kultura">Kultura</option>
                             </select>

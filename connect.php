@@ -9,10 +9,9 @@
     $dbc = mysqli_connect($imeServera, $username, $password, $basename)
             or die("Neuspjesno spajanje na bazu!");
 
-
     mysqli_set_charset($dbc, "utf8");
 
-    if($dbc){
-        echo "Uspješno spajanje!";
-    }
+    // if($dbc){
+    //     echo "Uspješno spajanje!";
+    // }
 ?>

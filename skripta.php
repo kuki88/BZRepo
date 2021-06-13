@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="style.css">
         <title>B.Z. Berlin</title>
         <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="2;url=administracija.php">
+        <!-- <meta http-equiv="refresh" content="2;url=administracija.php"> -->
     </head>
 
     <body>
@@ -18,13 +18,11 @@
                 $naslov = $_POST['naslovClanka'];
                 $sazetak = $_POST['sazetak'];
                 $tekst = $_POST['tekst'];
-                $kategorija = $_POST['kategorijaVijesti'];
+                $kategorija = $_POST['kategorija'];
                 $datum = date('d.m.Y');
                 $check = 0;
                 $slika = $_FILES['slika']['name'];
                 $targer_dir = 'img/'.$slika;
-                echo $targer_dir;
-                move_uploaded_file($_FILES["slika"]["name"], $target_dir);        
 
                 if(isset($_POST['arhiva'])){
                     $check = 1;  
@@ -34,6 +32,8 @@
             $query = "INSERT INTO Vijesti(datum, naslov, sazetak, sadrzaj, slika, kategorija, arhiva)
                     VALUES('$datum', '$naslov', '$sazetak', '$tekst', '$slika', '$kategorija', '$check');";
             $res = mysqli_query($dbc, $query) or die("Error querying database");
+
+
             mysqli_close($dbc); 
         ?>
 

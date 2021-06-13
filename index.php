@@ -34,7 +34,7 @@
             <div class="row">
               <?php
 
-                $query = "SELECT * FROM vijesti WHERE arhiva=0 AND kategorija='sport' LIMIT 3";
+                $query = "SELECT * FROM vijesti WHERE arhiva=0 AND kategorija='sport' ORDER BY RAND() LIMIT 3";
                 $result = mysqli_query($dbc, $query);
 
                 if($result){
@@ -67,7 +67,7 @@
             <div class="row">
               <?php
 
-                $query = "SELECT * FROM vijesti WHERE arhiva=0 AND kategorija='kultura' LIMIT 3";
+                $query = "SELECT * FROM vijesti WHERE arhiva=0 AND kategorija='kultura' ORDER BY RAND() LIMIT 3";
                 $result = mysqli_query($dbc, $query);
 
                 if($result){
